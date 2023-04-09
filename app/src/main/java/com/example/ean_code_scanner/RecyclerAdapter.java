@@ -48,8 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             int position = getBindingAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Product product = (Product) listRecyclerItem.get(position);
-                String eanCode = product.getEANcode();
-                Toast.makeText(context, "Kod EAN tego produktu: " + eanCode, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Kod EAN produktu o nazwie " + product.getName() + ": " + product.getEANcode(), Toast.LENGTH_LONG).show();
             }
         }
     }

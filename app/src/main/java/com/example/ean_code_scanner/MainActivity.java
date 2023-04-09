@@ -29,7 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button scanBtn;
-    EditText eanInput;
+    EditText eanInput, searchInp;
 
     private RecyclerView mRecyclerView;
     protected static List<Object> viewItems = new ArrayList<>();
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         jsonController = new JsonController();
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         scanBtn = findViewById(R.id.scanBtn);
         eanInput = findViewById(R.id.eanInput);
+        searchInp = findViewById(R.id.searchByNameInp);
 
         scanBtn.setOnClickListener(v -> {
             scanCode();
@@ -69,6 +70,21 @@ public class MainActivity extends AppCompatActivity {
                 if (event == null || !event.isShiftPressed()) {
                     String eanCode = eanInput.getText().toString();
                     handleEAN(eanCode);
+
+                    return true;
+                }
+            }
+            return false;
+        });
+        searchInp.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    actionId == EditorInfo.IME_ACTION_DONE ||
+                    event != null &&
+                            event.getAction() == KeyEvent.ACTION_DOWN &&
+                            event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+            {
+                if (event == null || !event.isShiftPressed()) {
+                    jsonController.generateView(searchInp.getText().toString().toLowerCase());
 
                     return true;
                 }

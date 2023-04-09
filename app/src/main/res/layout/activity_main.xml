@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <LinearLayout
+        android:id="@+id/eanTools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -27,12 +28,21 @@
 
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/searchByNameInp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Podaj nazwe produku..."
+        android:paddingHorizontal="8dp"
+        android:layout_below="@+id/eanTools"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="vertical"
-        android:layout_marginTop="60dp" >
+        android:layout_below="@+id/searchByNameInp" >
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

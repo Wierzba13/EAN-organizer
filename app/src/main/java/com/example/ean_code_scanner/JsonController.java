@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -26,6 +28,7 @@ public class JsonController extends MainActivity {
     private static final File jsonFile = new File(FILE_PATH);
 
     public JsonController() {
+        super();
         if (!jsonFile.exists()) {
             try {
                 jsonFile.createNewFile();
@@ -33,11 +36,10 @@ public class JsonController extends MainActivity {
                 System.out.println(e.getMessage());
             }
         }
-
-        this.generateView();
+        this.generateView("");
     }
 
-    public void generateView() {
+    public void generateView(String searchName) {
         MainActivity.viewItems.clear();
         FileInputStream fileInputStream = null;
         try {
@@ -56,7 +58,15 @@ public class JsonController extends MainActivity {
                     JSONObject jsonObj = jsonArray.getJSONObject(j);
 
                     Product product = new Product(jsonObj.getString("EANcode"), jsonObj.getString("name"), jsonObj.getString("price"));
-                    MainActivity.viewItems.add(product);
+
+                    if(searchName.length() > 0) {
+                        if(product.getName().toLowerCase().contains(searchName)) {
+                            MainActivity.viewItems.add(product);
+                        }
+                    }
+                    else {
+                        MainActivity.viewItems.add(product);
+                    }
                 }
                 MainActivity.mAdapter.notifyDataSetChanged(); // to refresh changes
             }
@@ -172,7 +182,7 @@ public class JsonController extends MainActivity {
                 output = new BufferedWriter(new FileWriter(file));
                 output.write(jsonArray.toString());
                 output.close();
-                this.generateView();
+                this.generateView("");
             } else {
                 JSONArray jsonArray = new JSONArray();
                 jsonArray.put(jsonObject);
@@ -183,7 +193,7 @@ public class JsonController extends MainActivity {
                 output = new BufferedWriter(new FileWriter(file));
                 output.write(jsonArray.toString());
                 output.close();
-                this.generateView();
+                this.generateView("");
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -226,7 +236,7 @@ public class JsonController extends MainActivity {
                 output = new BufferedWriter(new FileWriter(file));
                 output.write(jsonArray.toString());
                 output.close();
-                this.generateView();
+                this.generateView("");
             }
         } catch (Exception e) {
             e.printStackTrace();
