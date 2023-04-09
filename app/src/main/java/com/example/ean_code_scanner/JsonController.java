@@ -1,6 +1,12 @@
 package com.example.ean_code_scanner;
 
+import android.content.ContentValues;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +21,8 @@ import java.io.IOException;
 import java.io.Writer;
 
 public class JsonController extends MainActivity {
-    private static final String FILE_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/codes.json";
+
+    private static String FILE_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/codes.json";
     private static final File jsonFile = new File(FILE_PATH);
 
     public JsonController() {

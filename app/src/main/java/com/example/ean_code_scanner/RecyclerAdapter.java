@@ -26,18 +26,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.listRecyclerItem = listRecyclerItem;
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView name;
         private TextView price;
         private Button deleteBtn;
+        private View parentLayout;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById(R.id.price);
             deleteBtn = (Button) itemView.findViewById(R.id.deleteBtn);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
+            parentLayout.setOnClickListener(this);
             jsonController = new JsonController();
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getBindingAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Product product = (Product) listRecyclerItem.get(position);
+                String eanCode = product.getEANcode();
+                Toast.makeText(context, "Kod EAN tego produktu: " + eanCode, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
