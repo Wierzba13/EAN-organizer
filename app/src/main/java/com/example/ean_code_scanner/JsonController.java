@@ -1,14 +1,6 @@
 package com.example.ean_code_scanner;
 
-import android.content.ContentValues;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;

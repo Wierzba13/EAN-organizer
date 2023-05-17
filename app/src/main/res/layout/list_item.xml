@@ -13,11 +13,14 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="40"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:text="Przykladowa nazwa produktu"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="4dp"/>
 
     <View
         android:layout_width="2dp"
@@ -29,21 +32,23 @@
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="70"
+        android:layout_weight="65"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/purple"
         android:text="599.95"
-        android:layout_gravity="center_vertical"
-        />
+        android:layout_gravity="center_vertical" />
 
-    <Button
+    <ImageButton
         android:id="@+id/deleteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="3dp"
-        android:text="Usun"
         android:layout_gravity="center_vertical"
-        android:backgroundTint="@color/yellow" />
+        android:src="@drawable/ic_delete"
+        android:backgroundTint="@color/yellow"
+        android:adjustViewBounds="true"
+        android:padding="15dp"
+        android:scaleType="fitCenter" />
 
 </LinearLayout>

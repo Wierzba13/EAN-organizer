@@ -24,6 +24,20 @@
         android:layout_marginTop="20dp">
 
         <EditText
+            android:id="@+id/eanInp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Podaj kod EAN produku"
+            android:imeOptions="actionDone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <EditText
             android:id="@+id/priceInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

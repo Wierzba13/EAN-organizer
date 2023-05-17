@@ -11,12 +11,17 @@
         android:padding="5dp"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/scanBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zeskanuj"
-            android:backgroundTint="@color/yellow" />
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_camera"
+            android:backgroundTint="@color/yellow"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            />
 
         <EditText
             android:id="@+id/eanInput"
