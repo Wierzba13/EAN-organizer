@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 String name = jsonObj.getString("name");
                 String price = jsonObj.getString("price");
+                String additionalComments = jsonObj.getString("additionalComments");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Informacje o produkcie");
@@ -120,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 EditText priceInp = inputs.findViewById(R.id.priceInp);
                 priceInp.setText(price);
 
+                EditText additionalCommentsInp = inputs.findViewById(R.id.additionalCommentsInp);
+                additionalCommentsInp.setText(additionalComments);
+
                 builder.setPositiveButton("ZAPISZ", null);
                 builder.setNegativeButton("WYJDŹ", null);
 
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if(wantToCloseDialog) {
                         jsonController.deleteEAN(eanCode);
-                        jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString());
+                        jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString(), additionalCommentsInp.getText().toString());
                         dialog.dismiss();
                         Toast.makeText(this, "Edytowano produkt: " + nameInp.getText(), Toast.LENGTH_LONG).show();
                     } else {
@@ -155,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             EditText eanInp = inputs.findViewById(R.id.eanInp);
             eanInp.setText(eanCode);
             EditText priceInp = inputs.findViewById(R.id.priceInp);
+            EditText additionalCommentsInp = inputs.findViewById(R.id.additionalCommentsInp);
+
             builder.setPositiveButton("DODAJ", null);
             builder.setNegativeButton("ANULUJ", null);
 
@@ -168,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 if(name.length() > 0 && price.length() > 0 && eanCodeInp.length() > 0) wantToCloseDialog = true;
 
                 if(wantToCloseDialog) {
-                    jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString());
+                    jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString(), additionalCommentsInp.getText().toString());
                     dialog.dismiss();
                     Toast.makeText(this, "Dodano nowy produkt: " + nameInp.getText(), Toast.LENGTH_LONG).show();
                 } else {

@@ -49,7 +49,7 @@ public class JsonController extends MainActivity {
                 for (int j = 0; j < max; j++) {
                     JSONObject jsonObj = jsonArray.getJSONObject(j);
 
-                    Product product = new Product(jsonObj.getString("EANcode"), jsonObj.getString("name"), jsonObj.getString("price"));
+                    Product product = new Product(jsonObj.getString("EANcode"), jsonObj.getString("name"), jsonObj.getString("price"), jsonObj.getString("additionalComments"));
 
                     if(searchName.length() > 0) {
                         if(product.getName().toLowerCase().contains(searchName)) {
@@ -147,7 +147,7 @@ public class JsonController extends MainActivity {
         return false;
     }
 
-    public void addEAN(String eanCode, String name, String price) {
+    public void addEAN(String eanCode, String name, String price, String additionalComments) {
 
         FileInputStream fileInputStream = null;
         try {
@@ -155,6 +155,7 @@ public class JsonController extends MainActivity {
             jsonObject.put("EANcode", eanCode);
             jsonObject.put("name", name);
             jsonObject.put("price", price);
+            jsonObject.put("additionalComments", additionalComments);
 
             fileInputStream = new FileInputStream(jsonFile);
 

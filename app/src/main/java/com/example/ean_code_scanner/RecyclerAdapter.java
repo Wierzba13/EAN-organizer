@@ -60,6 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 try {
                     String name = jsonObj.getString("name");
                     String price = jsonObj.getString("price");
+                    String additionalComments = jsonObj.getString("additionalComments");
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Informacje o produkcie");
@@ -76,6 +77,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     EditText priceInp = inputs.findViewById(R.id.priceInp);
                     priceInp.setText(price);
 
+                    EditText additionalCommentsInp = inputs.findViewById(R.id.additionalCommentsInp);
+                    additionalCommentsInp.setText(additionalComments);
+
                     builder.setPositiveButton("ZAPISZ", null);
                     builder.setNegativeButton("WYJDŹ", null);
 
@@ -87,7 +91,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                         if(wantToCloseDialog) {
                             jsonController.deleteEAN(eanCode);
-                            jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString());
+                            jsonController.addEAN(eanCode, nameInp.getText().toString(), priceInp.getText().toString(), additionalCommentsInp.getText().toString());
                             dialog.dismiss();
                             Toast.makeText(context, "Edytowano produkt: " + nameInp.getText(), Toast.LENGTH_LONG).show();
                         } else {

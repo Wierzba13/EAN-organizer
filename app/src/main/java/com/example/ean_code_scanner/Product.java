@@ -4,11 +4,13 @@ public class Product {
     private final String EANcode;
     private final String name;
     private final String price;
+    private final String additionalComments;
 
-    public Product(String EANcode, String name, String price) {
+    public Product(String EANcode, String name, String price, String additionalComments) {
         this.EANcode = EANcode;
         this.name = name;
         this.price = price;
+        this.additionalComments = additionalComments;
     }
 
     public String getEANcode() {
@@ -22,4 +24,6 @@ public class Product {
     public String getPrice() {
         return price;
     }
+
+    public String getAdditionalComments() { return additionalComments; }
 }
