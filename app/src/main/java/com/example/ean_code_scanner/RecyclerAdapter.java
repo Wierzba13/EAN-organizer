@@ -104,7 +104,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
                         }
                     });
 
-                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(c -> dialog.cancel());
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(c -> dialog.dismiss());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,13 +123,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int position) {
         Product product = listRecyclerItem.get(position);
+        String productName = !product.getName().isEmpty() ? product.getName() : "Brak danych";
 
-        itemViewHolder.name.setText(!product.getName().isEmpty() ? product.getName() : "Brak danych");
-        itemViewHolder.price.setText(!product.getPrice().isEmpty() ? product.getPrice() + "zł" : "0zł");
+        itemViewHolder.name.setText(productName);
+        itemViewHolder.price.setText(!product.getPrice().isEmpty() ? product.getPrice() + " zł" : "0 zł");
         itemViewHolder.deleteBtn.setOnClickListener(v -> {
-            jsonController.deleteEAN(product.getEANcode());
-            onDataChanged.run();
-            Toast.makeText(context, "Usunięto produkt o numerze EAN: " + product.getEANcode(), Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(context)
+                    .setTitle("Usuń produkt")
+                    .setMessage("Czy na pewno chcesz usunąć produkt \"" + productName + "\" (EAN: " + product.getEANcode() + ")?")
+                    .setPositiveButton("USUŃ", (dialog, which) -> {
+                        jsonController.deleteEAN(product.getEANcode());
+                        onDataChanged.run();
+                        Toast.makeText(context, "Usunięto produkt: " + productName, Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("ANULUJ", (dialog, which) -> dialog.dismiss())
+                    .show();
         });
     }
 

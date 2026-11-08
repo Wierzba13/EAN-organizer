@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter mAdapter;
 
     private JsonController jsonController;
+    private AlertDialog currentDialog;
+    private long lastEanHandleTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +62,24 @@ public class MainActivity extends AppCompatActivity {
         scanBtn.setOnClickListener(v -> scanCode());
 
         eanInput.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                    actionId == EditorInfo.IME_ACTION_DONE ||
-                    actionId == EditorInfo.IME_ACTION_NEXT ||
-                    (event != null &&
-                            event.getAction() == KeyEvent.ACTION_DOWN &&
-                            event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                if (event == null || !event.isShiftPressed()) {
+            boolean isEnterDown = event != null
+                    && event.getAction() == KeyEvent.ACTION_DOWN
+                    && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
+                    && !event.isShiftPressed();
+            boolean isImeAction = actionId == EditorInfo.IME_ACTION_SEARCH
+                    || actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_NEXT;
+
+            if (isImeAction || isEnterDown) {
+                long now = SystemClock.elapsedRealtime();
+                if (now - lastEanHandleTime > 400) {
+                    lastEanHandleTime = now;
                     String eanCode = eanInput.getText().toString().trim();
                     handleEAN(eanCode);
-                    return true;
                 }
+                return true;
             }
-            return false;
+            return event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
         });
 
         searchInp.setOnEditorActionListener((v, actionId, event) -> {
@@ -119,6 +127,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleEAN(String eanCode) {
+        if (currentDialog != null && currentDialog.isShowing()) {
+            return;
+        }
+
         if (jsonController.checkEAN(eanCode)) {
             JSONObject jsonObj = jsonController.getEANdata(eanCode);
             try {
@@ -148,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNegativeButton("WYJDŹ", null);
 
                 final AlertDialog dialog = builder.create();
+                currentDialog = dialog;
                 dialog.show();
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                     String newName = nameInp.getText().toString().trim();
@@ -157,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!newName.isEmpty() && !newPrice.isEmpty()) {
                         jsonController.deleteEAN(eanCode);
                         jsonController.addEAN(eanCode, newName, newPrice, newComments);
+                        eanInput.setText("");
                         refreshList();
                         dialog.dismiss();
                         Toast.makeText(this, "Edytowano produkt: " + newName, Toast.LENGTH_LONG).show();
@@ -165,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> dialog.cancel());
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> dialog.dismiss());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -185,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setNegativeButton("ANULUJ", null);
 
             final AlertDialog dialog = builder.create();
+            currentDialog = dialog;
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                 String name = nameInp.getText().toString().trim();
@@ -198,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                     jsonController.addEAN(eanCodeInp, name, price, comments);
+                    eanInput.setText("");
                     refreshList();
                     dialog.dismiss();
                     Toast.makeText(this, "Dodano nowy produkt: " + name, Toast.LENGTH_LONG).show();
@@ -206,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> dialog.cancel());
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> dialog.dismiss());
         }
     }
 
