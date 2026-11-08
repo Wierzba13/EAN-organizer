@@ -9,12 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj nazwe produku"
-            android:imeOptions="actionDone" />
+            android:hint="Podaj nazwę produktu"
+            android:inputType="text"
+            android:imeOptions="actionNext" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -23,12 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eanInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj kod EAN produku"
-            android:imeOptions="actionDone" />
+            android:hint="Podaj kod EAN produktu"
+            android:inputType="number"
+            android:imeOptions="actionNext" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,12 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/priceInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj cene produku [zł]"
-            android:imeOptions="actionDone" />
+            android:hint="Podaj cenę produktu [zł]"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,11 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/additionalCommentsInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Dodatkowe uwagi"
+            android:inputType="textMultiLine"
             android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>

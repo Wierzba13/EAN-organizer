@@ -3,36 +3,35 @@
     android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="100"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="8dp"
     android:layout_marginBottom="5dp"
-    android:padding="5dp"
+    android:padding="8dp"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="40"
+        android:layout_weight="60"
         android:textSize="16sp"
         android:textStyle="bold"
         android:maxLines="3"
         android:ellipsize="end"
-        android:text="Przykladowa nazwa produktu"
+        android:text="Przykładowa nazwa produktu"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="4dp"/>
+        android:layout_marginEnd="4dp" />
 
     <View
         android:layout_width="2dp"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:background="@color/yellow"
-        android:layout_marginRight="6dp"/>
+        android:layout_marginEnd="6dp" />
 
     <TextView
         android:id="@+id/price"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="65"
+        android:layout_weight="40"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/purple"
@@ -43,12 +42,13 @@
         android:id="@+id/deleteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="3dp"
+        android:layout_marginEnd="3dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/ic_delete"
         android:backgroundTint="@color/yellow"
         android:adjustViewBounds="true"
         android:padding="15dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:contentDescription="Usuń produkt" />
 
 </LinearLayout>

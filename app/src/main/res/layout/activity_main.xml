@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/eanTools"
@@ -21,15 +21,18 @@
             android:adjustViewBounds="true"
             android:padding="15dp"
             android:scaleType="fitCenter"
-            />
+            android:contentDescription="Skanuj kod EAN" />
 
         <EditText
             android:id="@+id/eanInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wpisz kod EAN"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginStart="8dp" />
 
     </LinearLayout>
 
@@ -37,24 +40,19 @@
         android:id="@+id/searchByNameInp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Podaj nazwe produku..."
+        android:hint="Podaj nazwę produktu..."
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
         android:paddingHorizontal="8dp"
-        android:layout_below="@+id/eanTools"
-        />
+        android:layout_below="@+id/eanTools" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
+        android:layout_below="@+id/searchByNameInp"
         android:scrollbars="vertical"
-        android:layout_below="@+id/searchByNameInp" >
+        tools:listitem="@layout/list_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/my_recycler_view"
-            android:scrollbars="vertical"
-            tools:listitem="@+id/list_item" />
-
-    </ScrollView>
 </RelativeLayout>
