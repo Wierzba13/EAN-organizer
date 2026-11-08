@@ -14,8 +14,11 @@
     <color name="bg_screen">#FFF5F6FA</color>
     <color name="surface_card">#FFFFFFFF</color>
     <color name="text_primary">#FF1F2430</color>
-    <color name="text_secondary">#FF6E7687</color>
+    <color name="text_secondary">#FF5A6275</color>
     <color name="divider_color">#FFE4E7EE</color>
+    <color name="input_stroke_default">#FF8C94A6</color>
+    <color name="input_stroke_unfocused">#FFB8BFCE</color>
+    <color name="input_bg">#FFF9FAFC</color>
     <color name="danger_bg">#FFFFEBEE</color>
     <color name="danger_tint">#FFD32F2F</color>
     <color name="price_badge_bg">#FFEDE7F6</color>

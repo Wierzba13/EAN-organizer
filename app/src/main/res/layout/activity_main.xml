@@ -51,20 +51,28 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
-                    android:hint="Wpisz kod EAN i zatwierdź"
+                    android:hint="Wpisz kod (np. EAN) i zatwierdź"
+                    android:textColorHint="@color/text_secondary"
+                    app:hintTextColor="@color/purple_500"
+                    app:boxStrokeColor="@color/input_box_stroke"
+                    app:boxStrokeWidth="1.5dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxBackgroundColor="@color/input_bg"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:endIconMode="clear_text">
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/text_secondary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/eanInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:imeOptions="actionDone"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:textColor="@color/text_primary" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,12 +83,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Szukaj po nazwie lub kodzie EAN..."
+                android:hint="Szukaj po nazwie lub kodzie..."
+                android:textColorHint="@color/text_secondary"
+                app:hintTextColor="@color/purple_500"
+                app:boxStrokeColor="@color/input_box_stroke"
+                app:boxStrokeWidth="1.5dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxBackgroundColor="@color/input_bg"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/text_secondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/searchByNameInp"
@@ -88,7 +103,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:imeOptions="actionSearch"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/text_primary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:text="Zeskanuj kod kreskowy aparatem lub wpisz numer EAN powyżej, aby dodać produkt."
+                android:text="Zeskanuj kod kreskowy aparatem lub wpisz dowolny kod powyżej, aby dodać produkt."
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 

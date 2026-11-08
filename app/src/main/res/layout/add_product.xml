@@ -13,6 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nazwa produktu"
+        android:textColorHint="@color/text_secondary"
+        app:hintTextColor="@color/purple_500"
+        app:boxStrokeColor="@color/input_box_stroke"
+        app:boxStrokeWidth="1.5dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxBackgroundColor="@color/input_bg"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -23,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences"
+            android:textColor="@color/text_primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,7 +39,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:hint="Kod EAN"
+        android:hint="Kod produktu / EAN"
+        android:textColorHint="@color/text_secondary"
+        app:hintTextColor="@color/purple_500"
+        app:boxStrokeColor="@color/input_box_stroke"
+        app:boxStrokeWidth="1.5dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxBackgroundColor="@color/input_bg"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -43,7 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
-            android:inputType="number" />
+            android:inputType="text"
+            android:textColor="@color/text_primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,18 +67,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:hint="Cena produktu"
+        android:textColorHint="@color/text_secondary"
+        app:hintTextColor="@color/purple_500"
+        app:boxStrokeColor="@color/input_box_stroke"
+        app:boxStrokeWidth="1.5dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxBackgroundColor="@color/input_bg"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
-        app:suffixText="zł">
+        app:suffixText="zł"
+        app:suffixTextColor="@color/text_secondary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/priceInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +96,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:hint="Dodatkowe uwagi (opcjonalnie)"
+        android:textColorHint="@color/text_secondary"
+        app:hintTextColor="@color/purple_500"
+        app:boxStrokeColor="@color/input_box_stroke"
+        app:boxStrokeWidth="1.5dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxBackgroundColor="@color/input_bg"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -85,7 +113,8 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:textColor="@color/text_primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
