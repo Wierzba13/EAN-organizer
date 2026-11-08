@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.journeyapps.barcodescanner.ScanContract;
@@ -31,6 +32,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ImageButton scanBtn;
     private EditText eanInput, searchInp;
+    private TextView productCountTv;
+    private View emptyStateView;
 
     private RecyclerView mRecyclerView;
     private final List<Product> viewItems = new ArrayList<>();
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         scanBtn = findViewById(R.id.scanBtn);
         eanInput = findViewById(R.id.eanInput);
         searchInp = findViewById(R.id.searchByNameInp);
+        productCountTv = findViewById(R.id.productCountTv);
+        emptyStateView = findViewById(R.id.emptyStateView);
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -115,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
         viewItems.clear();
         viewItems.addAll(jsonController.getProducts(query));
         mAdapter.notifyDataSetChanged();
+
+        int count = viewItems.size();
+        if (productCountTv != null) {
+            productCountTv.setText(String.valueOf(count));
+        }
+        if (emptyStateView != null && mRecyclerView != null) {
+            emptyStateView.setVisibility(count == 0 ? View.VISIBLE : View.GONE);
+            mRecyclerView.setVisibility(count == 0 ? View.GONE : View.VISIBLE);
+        }
     }
 
     private void scanCode() {
@@ -131,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (jsonController.checkEAN(eanCode)) {
+        if (!eanCode.isEmpty() && jsonController.checkEAN(eanCode)) {
             JSONObject jsonObj = jsonController.getEANdata(eanCode);
             try {
                 String name = jsonObj.getString("name");
@@ -139,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 String additionalComments = jsonObj.optString("additionalComments", "");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Informacje o produkcie");
+                builder.setTitle("Edytuj produkt");
                 View inputs = LayoutInflater.from(this).inflate(R.layout.add_product, (ViewGroup) findViewById(android.R.id.content), false);
                 builder.setView(inputs);
 
@@ -157,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 additionalCommentsInp.setText(additionalComments);
 
                 builder.setPositiveButton("ZAPISZ", null);
-                builder.setNegativeButton("WYJDŹ", null);
+                builder.setNegativeButton("ANULUJ", null);
 
                 final AlertDialog dialog = builder.create();
                 currentDialog = dialog;
@@ -173,9 +187,9 @@ public class MainActivity extends AppCompatActivity {
                         eanInput.setText("");
                         refreshList();
                         dialog.dismiss();
-                        Toast.makeText(this, "Edytowano produkt: " + newName, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Zapisano zmiany: " + newName, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Uzupełnij dane!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Uzupełnij nazwę i cenę!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -185,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Dodaj produkt");
+            builder.setTitle("Dodaj nowy produkt");
             View inputs = LayoutInflater.from(this).inflate(R.layout.add_product, (ViewGroup) findViewById(android.R.id.content), false);
             builder.setView(inputs);
 
@@ -216,9 +230,9 @@ public class MainActivity extends AppCompatActivity {
                     eanInput.setText("");
                     refreshList();
                     dialog.dismiss();
-                    Toast.makeText(this, "Dodano nowy produkt: " + name, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Dodano nowy produkt: " + name, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Uzupełnij dane!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Uzupełnij nazwę, kod EAN i cenę!", Toast.LENGTH_SHORT).show();
                 }
             });
 

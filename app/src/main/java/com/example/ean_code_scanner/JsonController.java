@@ -80,7 +80,9 @@ public class JsonController {
                         jsonObj.optString("additionalComments", "")
                 );
 
-                if (query.isEmpty() || product.getName().toLowerCase().contains(query)) {
+                if (query.isEmpty()
+                        || product.getName().toLowerCase().contains(query)
+                        || product.getEANcode().toLowerCase().contains(query)) {
                     products.add(product);
                 }
             } catch (JSONException e) {

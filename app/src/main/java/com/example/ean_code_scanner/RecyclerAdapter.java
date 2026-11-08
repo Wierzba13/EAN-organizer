@@ -35,6 +35,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView name;
+        private final TextView eanCodeTv;
+        private final TextView commentsTv;
         private final TextView price;
         private final ImageButton deleteBtn;
         private final View parentLayout;
@@ -42,6 +44,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
+            eanCodeTv = itemView.findViewById(R.id.eanCodeTv);
+            commentsTv = itemView.findViewById(R.id.commentsTv);
             price = itemView.findViewById(R.id.price);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
             parentLayout = itemView.findViewById(R.id.parentLayout);
@@ -66,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
                     String additionalComments = jsonObj.optString("additionalComments", "");
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Informacje o produkcie");
+                    builder.setTitle("Edytuj produkt");
                     View inputs = LayoutInflater.from(context).inflate(R.layout.add_product, null, false);
                     builder.setView(inputs);
 
@@ -84,7 +88,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
                     additionalCommentsInp.setText(additionalComments);
 
                     builder.setPositiveButton("ZAPISZ", null);
-                    builder.setNegativeButton("WYJDŹ", null);
+                    builder.setNegativeButton("ANULUJ", null);
 
                     final AlertDialog dialog = builder.create();
                     dialog.show();
@@ -98,9 +102,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
                             jsonController.addEAN(eanCode, newName, newPrice, newComments);
                             onDataChanged.run();
                             dialog.dismiss();
-                            Toast.makeText(context, "Edytowano produkt: " + newName, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Zapisano zmiany: " + newName, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(context, "Uzupełnij dane!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Uzupełnij nazwę i cenę!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -124,15 +128,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int position) {
         Product product = listRecyclerItem.get(position);
         String productName = !product.getName().isEmpty() ? product.getName() : "Brak danych";
+        String ean = product.getEANcode();
+        String comments = product.getAdditionalComments() != null ? product.getAdditionalComments().trim() : "";
 
         itemViewHolder.name.setText(productName);
+        itemViewHolder.eanCodeTv.setText("EAN: " + (!ean.isEmpty() ? ean : "-"));
+
+        if (!comments.isEmpty()) {
+            itemViewHolder.commentsTv.setText(comments);
+            itemViewHolder.commentsTv.setVisibility(View.VISIBLE);
+        } else {
+            itemViewHolder.commentsTv.setVisibility(View.GONE);
+        }
+
         itemViewHolder.price.setText(!product.getPrice().isEmpty() ? product.getPrice() + " zł" : "0 zł");
         itemViewHolder.deleteBtn.setOnClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Usuń produkt")
-                    .setMessage("Czy na pewno chcesz usunąć produkt \"" + productName + "\" (EAN: " + product.getEANcode() + ")?")
+                    .setMessage("Czy na pewno chcesz usunąć produkt \"" + productName + "\" (EAN: " + ean + ")?")
                     .setPositiveButton("USUŃ", (dialog, which) -> {
-                        jsonController.deleteEAN(product.getEANcode());
+                        jsonController.deleteEAN(ean);
                         onDataChanged.run();
                         Toast.makeText(context, "Usunięto produkt: " + productName, Toast.LENGTH_SHORT).show();
                     })

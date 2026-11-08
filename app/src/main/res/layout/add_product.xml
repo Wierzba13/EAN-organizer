@@ -1,66 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="22dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="8dp">
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Nazwa produktu"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj nazwę produktu"
-            android:inputType="text"
-            android:imeOptions="actionNext" />
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="14dp"
+        android:hint="Kod EAN"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eanInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj kod EAN produktu"
-            android:inputType="number"
-            android:imeOptions="actionNext" />
+            android:imeOptions="actionNext"
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="14dp"
+        android:hint="Cena produktu"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:suffixText="zł">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/priceInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj cenę produktu [zł]"
-            android:inputType="numberDecimal"
-            android:imeOptions="actionNext" />
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="14dp"
+        android:hint="Dodatkowe uwagi (opcjonalnie)"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/additionalCommentsInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Dodatkowe uwagi"
-            android:inputType="textMultiLine"
-            android:imeOptions="actionDone" />
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

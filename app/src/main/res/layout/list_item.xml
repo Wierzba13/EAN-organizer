@@ -1,54 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="5dp"
-    android:padding="8dp"
-    android:orientation="horizontal">
+    android:layout_marginVertical="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/surface_card"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/divider_color"
+    app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="60"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:maxLines="3"
-        android:ellipsize="end"
-        android:text="Przykładowa nazwa produktu"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="4dp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="@color/yellow"
-        android:layout_marginEnd="6dp" />
+        <!-- Informacje o produkcie -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="40"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/purple"
-        android:text="599.95"
-        android:layout_gravity="center_vertical" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Przykładowa nazwa produktu"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/deleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_delete"
-        android:backgroundTint="@color/yellow"
-        android:adjustViewBounds="true"
-        android:padding="15dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="Usuń produkt" />
+            <TextView
+                android:id="@+id/eanCodeTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="EAN: 5901234567890"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/commentsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Cena -->
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_price_badge"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="599.95 zł"
+            android:textColor="@color/purple"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- Przycisk usuwania -->
+        <ImageButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Usuń produkt"
+            android:padding="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/danger_tint" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
