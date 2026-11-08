@@ -5,7 +5,7 @@ Aplikacja mobilna na system Android służąca do skanowania, katalogowania oraz
 > **Brak weryfikacji kodów w zewnętrznych bazach (użytek lokalny):**
 > Aplikacja nie waliduje wprowadzanych kodów EAN w żadnej bazie, a jako kod można podać dowolny ciąg znaków, dzięki czemu jest odpowiednia również na użytek lokalny.
 
-![](example.jpg)
+<img src="example.jpg" width="300">
 
 ---
 
